@@ -1,2 +1,3 @@
-# AWS Provider Configuration
-# Defines target region and default tags for provisioned resources
+provider "aws" {
+  region = var.aws_region
+}

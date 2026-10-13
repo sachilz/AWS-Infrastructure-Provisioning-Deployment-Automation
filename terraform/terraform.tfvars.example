@@ -3,8 +3,7 @@
 # NEVER commit `terraform.tfvars` containing secrets or real private keys.
 
 aws_region        = "us-east-1"
-environment       = "dev"
-instance_type     = "t2.micro"
-key_name          = "my-devops-key"
-public_key_path   = "~/.ssh/id_rsa.pub"
-allowed_ssh_cidr  = "YOUR_PUBLIC_IP/32"
+project_name      = "aws-devops-automation"
+instance_type     = "t3.micro"
+ssh_allowed_cidr  = "YOUR_PUBLIC_IP/32"       # Run: curl -s https://checkip.amazonaws.com to find your IP
+public_key_path   = "~/.ssh/id_rsa.pub"      # Path to your local SSH public key
