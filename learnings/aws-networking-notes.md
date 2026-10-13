@@ -6,6 +6,26 @@
   - `10.0.0.0/16` provides $2^{16} = 65,536$ private IPv4 addresses.
   - Acts as the outer security and IP boundary for our cloud resources.
 
+### VPC DNS Resolution Settings (`enable_dns_support` vs `enable_dns_hostnames`)
+In AWS VPCs, DNS resolution is controlled by two distinct boolean flags:
+
+1. **`enable_dns_support = true` (The "Phonebook")**:
+   - **What it does**: Activates Amazon's built-in Route 53 Resolver at the VPC base address + 2 (e.g., `10.0.0.2`).
+   - **When enabled**: Servers inside the VPC can translate external and internal domain names into IP addresses. Essential for running `sudo apt update`, `curl`, and connecting to external APIs.
+   - **When disabled**: The server cannot resolve domain names; commands relying on URLs will fail.
+
+2. **`enable_dns_hostnames = true` (The "Name Tag")**:
+   - **What it does**: Controls whether instances launched with public IP addresses also receive a public DNS hostname.
+   - **When enabled**: Your EC2 instance gets an official AWS public hostname (e.g., `ec2-54-210-88-142.compute-1.amazonaws.com`) alongside its numeric public IP (`54.210.88.142`).
+   - **When disabled**: The instance only has a raw numeric IP address; the Public DNS field in AWS Console remains blank.
+
+| Setting | Real-World Analogy | If `true` | If `false` |
+|---|---|---|---|
+| **`enable_dns_support`** | **The Phonebook** | Server can look up website names (`google.com`). | Server cannot look up domain names; package updates fail. |
+| **`enable_dns_hostnames`** | **The Name Tag** | Server gets its own public AWS URL (`ec2-xx-xx.compute-1.amazonaws.com`). | Server only has numeric IPs, no public hostname. |
+
+> **Dependency Rule**: In AWS, `enable_dns_hostnames = true` requires `enable_dns_support = true` to function. Setting both to `true` is industry best practice for standard VPCs.
+
 ## 2. Subnets (Public vs. Private)
 - **Subnet (`10.0.1.0/24`)**: A partition of the VPC IP range in a specific Availability Zone (e.g., `us-east-1a`).
 - **What makes a subnet "Public"?**:
