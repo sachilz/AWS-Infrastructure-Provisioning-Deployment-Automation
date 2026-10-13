@@ -11,8 +11,9 @@ Documenting problems and solutions is one of the strongest indicators of practic
 
 ## 📁 Folder Contents
 
-- [`issue-template.md`](issue-template.md): The standardized template to copy and fill out whenever you hit an error.
+- [`aws-cli-wsl-troubleshooting.md`](aws-cli-wsl-troubleshooting.md): In-depth WSL Ubuntu setup guide covering APT package issues, missing dependencies, root installation fixes, and STS authentication.
 - [`resolved-issues.md`](resolved-issues.md): Running catalog of all resolved problems encountered across Terraform, Ansible, AWS, and Linux.
+- [`issue-template.md`](issue-template.md): Standardized template to copy and fill out whenever you hit a new error.
 
 ---
 
