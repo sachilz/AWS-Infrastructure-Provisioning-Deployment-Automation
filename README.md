@@ -84,7 +84,13 @@ AWS-Infrastructure-Provisioning-Deployment-Automation/
 ├── problems/                     # Issues & Troubleshooting Catalog
 │   ├── README.md                 # 5-step debugging framework
 │   ├── issue-template.md         # Template to document new errors
+│   ├── aws-cli-wsl-troubleshooting.md # WSL setup & auth deep dive
 │   └── resolved-issues.md        # Running catalog of bugs, root causes, and fixes
+│
+├── commands/                     # Terminal Commands & Execution Breakdowns
+│   ├── README.md                 # Index of command reference guides
+│   ├── terraform-installation-wsl.md  # Line-by-line Terraform install breakdown
+│   └── aws-cli-commands-wsl.md   # AWS CLI v2 install & STS authentication
 │
 └── docs/                         # Project Architecture & Guides
     ├── architecture.md           # Architecture diagrams and design details
