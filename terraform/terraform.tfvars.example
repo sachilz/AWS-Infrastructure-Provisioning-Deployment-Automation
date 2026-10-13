@@ -1,0 +1,10 @@
+# Example Terraform Variables
+# Copy this file to `terraform.tfvars` and customize with your own local values.
+# NEVER commit `terraform.tfvars` containing secrets or real private keys.
+
+aws_region        = "us-east-1"
+environment       = "dev"
+instance_type     = "t2.micro"
+key_name          = "my-devops-key"
+public_key_path   = "~/.ssh/id_rsa.pub"
+allowed_ssh_cidr  = "YOUR_PUBLIC_IP/32"

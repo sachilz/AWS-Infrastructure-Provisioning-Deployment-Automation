@@ -1,0 +1,8 @@
+---
+# Master Orchestration Playbook
+# Provisions and configures web servers and deploys static site
+- name: Configure Web Server and Deploy Application
+  hosts: webservers
+  become: true
+  roles:
+    - nginx

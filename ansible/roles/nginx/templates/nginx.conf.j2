@@ -1,0 +1,13 @@
+# Nginx Configuration Template (Jinja2)
+# Configured dynamically for virtual host and root directory
+server {
+    listen 80;
+    server_name _;
+
+    root /var/www/html;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

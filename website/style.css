@@ -1,0 +1,603 @@
+/* ==============================================================================
+   Facebook Profile Dashboard - Simple Clone Stylesheet
+   ============================================================================== */
+
+:root {
+    --fb-blue: #1877f2;
+    --fb-blue-hover: #166fe5;
+    --fb-bg: #f0f2f5;
+    --fb-card-bg: #ffffff;
+    --fb-text-primary: #050505;
+    --fb-text-secondary: #65676b;
+    --fb-border: #ced0d4;
+    --fb-divider: #e4e6eb;
+    --fb-btn-secondary: #e4e6eb;
+    --fb-btn-secondary-hover: #d8dadf;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--fb-bg);
+    color: var(--fb-text-primary);
+    line-height: 1.4;
+    min-height: 100vh;
+}
+
+/* ==============================================================================
+   Top Navigation Bar
+   ============================================================================== */
+.fb-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    background-color: var(--fb-card-bg);
+    border-bottom: 1px solid var(--fb-divider);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.fb-logo {
+    width: 40px;
+    height: 40px;
+    background-color: var(--fb-blue);
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 800;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: var(--fb-bg);
+    border-radius: 50px;
+    padding: 8px 12px;
+    gap: 8px;
+    width: 240px;
+}
+
+.search-icon {
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+}
+
+.nav-center {
+    display: flex;
+    height: 100%;
+    gap: 8px;
+}
+
+.nav-tab {
+    background: none;
+    border: none;
+    padding: 0 28px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 3px solid transparent;
+    border-radius: 8px;
+    margin: 4px 0;
+}
+
+.nav-tab:hover {
+    background-color: var(--fb-bg);
+}
+
+.nav-tab.active {
+    border-bottom: 3px solid var(--fb-blue);
+    border-radius: 0;
+}
+
+.nav-circle-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--fb-btn-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.nav-circle-btn:hover {
+    background-color: var(--fb-btn-secondary-hover);
+}
+
+.user-avatar-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+}
+
+/* ==============================================================================
+   Profile Header Section
+   ============================================================================== */
+.profile-container {
+    max-width: 1095px;
+    margin: 0 auto;
+    padding-bottom: 32px;
+}
+
+.profile-header-card {
+    background-color: var(--fb-card-bg);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cover-photo {
+    height: 350px;
+    background: url('assets/cover.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 16px 32px;
+}
+
+.edit-cover-btn {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(4px);
+}
+
+.edit-cover-btn:hover {
+    background-color: #ffffff;
+}
+
+.profile-meta-bar {
+    padding: 0 32px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    position: relative;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--fb-divider);
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.avatar-wrapper {
+    position: relative;
+    margin-top: -80px;
+}
+
+.profile-avatar {
+    width: 168px;
+    height: 168px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 4px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+}
+
+.avatar-camera-icon {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: var(--fb-btn-secondary);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+}
+
+.profile-name-info {
+    flex: 1;
+    margin-left: 16px;
+    min-width: 200px;
+}
+
+.profile-name {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.friends-count {
+    color: var(--fb-text-secondary);
+    font-size: 15px;
+    margin-top: 2px;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Common Buttons */
+.btn {
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.btn-primary {
+    background-color: var(--fb-blue);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: var(--fb-blue-hover);
+}
+
+.btn-secondary {
+    background-color: var(--fb-btn-secondary);
+    color: var(--fb-text-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--fb-btn-secondary-hover);
+}
+
+.btn-full-secondary {
+    width: 100%;
+    background-color: var(--fb-btn-secondary);
+    color: var(--fb-text-primary);
+    margin: 12px 0;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.btn-full-secondary:hover {
+    background-color: var(--fb-btn-secondary-hover);
+}
+
+/* Profile Sub-tabs */
+.profile-nav-tabs {
+    padding: 0 32px;
+    display: flex;
+    gap: 4px;
+}
+
+.tab-link {
+    text-decoration: none;
+    color: var(--fb-text-secondary);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 16px 16px;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-link:hover {
+    background-color: var(--fb-bg);
+    border-radius: 6px;
+}
+
+.tab-link.active {
+    color: var(--fb-blue);
+    border-bottom: 3px solid var(--fb-blue);
+    border-radius: 0;
+}
+
+/* ==============================================================================
+   Profile Body & Cards (Two-Column Layout)
+   ============================================================================== */
+.profile-body-grid {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 16px;
+    padding: 0 16px;
+}
+
+.fb-card {
+    background-color: var(--fb-card-bg);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.see-all-link {
+    color: var(--fb-blue);
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.see-all-link:hover {
+    text-decoration: underline;
+}
+
+.sub-text {
+    font-size: 13px;
+    color: var(--fb-text-secondary);
+}
+
+.bio-text {
+    font-size: 15px;
+    text-align: center;
+    color: var(--fb-text-primary);
+    padding: 4px 8px;
+}
+
+.intro-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 15px;
+    margin: 8px 0;
+}
+
+/* Media & Friends Grid Previews */
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.media-box {
+    aspect-ratio: 1;
+    background-color: #203a43;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.photo-1 { background-color: #2b3a4a; }
+.photo-2 { background-color: #5c4ee5; }
+.photo-3 { background-color: #d84315; }
+.photo-4 { background-color: #e95420; }
+.photo-5 { background-color: #009639; }
+.photo-6 { background-color: #333333; }
+
+.friends-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.friend-item {
+    text-align: center;
+}
+
+.friend-avatar {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.fa-1 { background-color: #3b82f6; }
+.fa-2 { background-color: #ec4899; }
+.fa-3 { background-color: #10b981; }
+.fa-4 { background-color: #8b5cf6; }
+.fa-5 { background-color: #f59e0b; }
+.fa-6 { background-color: #06b6d4; }
+
+.friend-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--fb-text-primary);
+}
+
+/* ==============================================================================
+   Right Column: Posts & Feed
+   ============================================================================== */
+.create-post-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.create-post-input {
+    flex: 1;
+    background-color: var(--fb-bg);
+    border: none;
+    border-radius: 50px;
+    padding: 10px 16px;
+    font-size: 15px;
+    outline: none;
+}
+
+.card-divider {
+    border: none;
+    border-top: 1px solid var(--fb-divider);
+    margin: 8px 0;
+}
+
+.create-post-actions {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 4px;
+}
+
+.post-action-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fb-text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.post-action-btn:hover {
+    background-color: var(--fb-bg);
+}
+
+/* Post Cards */
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.post-author-name {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.post-time {
+    font-size: 13px;
+    color: var(--fb-text-secondary);
+}
+
+.post-menu-btn {
+    margin-left: auto;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--fb-text-secondary);
+    padding: 4px 8px;
+    border-radius: 50%;
+}
+
+.post-content {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.post-stats-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--fb-text-secondary);
+    padding: 6px 0;
+}
+
+.post-action-bar {
+    display: flex;
+    justify-content: space-around;
+}
+
+.feed-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fb-text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.feed-btn:hover {
+    background-color: var(--fb-bg);
+}
+
+/* ==============================================================================
+   Responsive Queries
+   ============================================================================== */
+@media (max-width: 900px) {
+    .profile-body-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cover-photo {
+        height: 200px;
+    }
+
+    .nav-center {
+        display: none;
+    }
+
+    .profile-meta-bar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-name-info {
+        margin-left: 0;
+    }
+
+    .search-box {
+        width: 140px;
+    }
+}

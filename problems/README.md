@@ -1,0 +1,31 @@
+# 🛠️ Issues, Bugs & Troubleshooting Log
+
+This directory serves as a record of real technical challenges, errors, and blockers encountered while building this project, along with their root causes and resolutions.
+
+Documenting problems and solutions is one of the strongest indicators of practical engineering maturity. It demonstrates:
+- Troubleshooting and debugging methodology.
+- Ability to read error logs and trace root causes.
+- Preventive mindset (knowing how to avoid repeating the same mistake).
+
+---
+
+## 📁 Folder Contents
+
+- [`issue-template.md`](issue-template.md): The standardized template to copy and fill out whenever you hit an error.
+- [`resolved-issues.md`](resolved-issues.md): Running catalog of all resolved problems encountered across Terraform, Ansible, AWS, and Linux.
+
+---
+
+## 🔍 The 5-Step DevOps Debugging Framework
+
+When you hit an error during this project, follow this structured approach:
+
+1. **Observe & Capture**: Don't clear your terminal! Copy the exact error code and command that triggered it.
+2. **Isolate the Layer**: Identify whether the error is:
+   - **Cloud/Network** (AWS SG, Route Table, VPC CIDR, IAM permissions)
+   - **IaC Syntax/State** (Terraform provider, variable mismatch, lock issue)
+   - **Connection/Auth** (SSH key permission, port 22 blocked, wrong remote user)
+   - **Configuration** (Ansible syntax, missing package, file path error)
+3. **Formulate a Hypothesis**: Ask: *"Why did the system reject this command or connection?"*
+4. **Apply Fix & Verify**: Test the fix in isolation.
+5. **Document**: Log it using [`issue-template.md`](issue-template.md).

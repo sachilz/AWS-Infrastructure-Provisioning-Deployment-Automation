@@ -1,0 +1,3 @@
+---
+# Nginx Role Handlers
+# Will handle: reload nginx, restart nginx

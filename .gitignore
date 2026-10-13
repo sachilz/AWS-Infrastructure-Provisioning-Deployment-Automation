@@ -1,0 +1,95 @@
+# ==============================================================================
+# Git Ignore - AWS Infrastructure Provisioning & Deployment Automation
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Terraform
+# ------------------------------------------------------------------------------
+# Local .terraform directories containing plugins and modules
+**/.terraform/*
+.terraform/
+
+# Terraform state files (may contain sensitive output and resource IDs)
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Terraform local override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Variable definitions with real secrets (never commit credentials/keys)
+*.tfvars
+*.tfvars.json
+
+# Always allow commit of example template files
+!*.tfvars.example
+!terraform.tfvars.example
+
+# CLI configuration files
+.terraformrc
+terraform.rc
+
+# ------------------------------------------------------------------------------
+# Ansible
+# ------------------------------------------------------------------------------
+# Playbook retry files
+*.retry
+
+# Ansible execution logs
+ansible.log
+
+# Real production inventories (may contain public IPs, host passwords)
+ansible/inventory/hosts.ini
+ansible/inventory/hosts
+ansible/inventory/inventory.ini
+
+# Keep example inventory tracked
+!ansible/inventory/hosts.example.ini
+
+# Ansible vault password files
+.vault_pass
+.vault_password
+
+# ------------------------------------------------------------------------------
+# SSH Keys & Cloud Credentials
+# ------------------------------------------------------------------------------
+*.pem
+*.key
+*.pub
+id_rsa
+id_rsa*
+*.cer
+*.pfx
+secrets/
+*.secret
+
+# Environment variable files
+.env
+.env.*
+!.env.example
+
+# AWS CLI credentials
+aws_credentials
+credentials.csv
+
+# ------------------------------------------------------------------------------
+# OS & Editor Files
+# ------------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE configuration
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.bak

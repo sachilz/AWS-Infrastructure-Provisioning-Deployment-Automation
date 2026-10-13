@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Profile Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="fb-navbar">
+        <div class="nav-left">
+            <div class="fb-logo">f</div>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Search Facebook">
+            </div>
+        </div>
+
+        <nav class="nav-center">
+            <button class="nav-tab active" title="Home">🏠</button>
+            <button class="nav-tab" title="Watch">📺</button>
+            <button class="nav-tab" title="Marketplace">🏪</button>
+            <button class="nav-tab" title="Groups">👥</button>
+        </nav>
+
+        <div class="nav-right">
+            <button class="nav-circle-btn" title="Menu">⋮⋮⋮</button>
+            <button class="nav-circle-btn" title="Messenger">💬</button>
+            <button class="nav-circle-btn" title="Notifications">🔔</button>
+            <img src="assets/profile.jpg" alt="Your Profile" class="user-avatar-small" title="Your Profile">
+        </div>
+    </header>
+
+    <!-- Main Profile Container -->
+    <main class="profile-container">
+        <!-- Cover and Header Section -->
+        <section class="profile-header-card">
+            <!-- Cover Photo Banner -->
+            <div class="cover-photo">
+                <button class="edit-cover-btn">📷 Edit cover photo</button>
+            </div>
+
+            <!-- Profile Info Bar -->
+            <div class="profile-meta-bar">
+                <div class="avatar-wrapper">
+                    <img src="assets/profile.jpg" alt="Sachintha Dilshan" class="profile-avatar">
+                    <span class="avatar-camera-icon">📷</span>
+                </div>
+
+                <div class="profile-name-info">
+                    <h1 class="profile-name">Sachintha Dilshan</h1>
+                    <p class="friends-count">1.4K friends • 28 mutual</p>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="btn btn-primary">+ Add to story</button>
+                    <button class="btn btn-secondary">✏️ Edit profile</button>
+                </div>
+            </div>
+
+            <!-- Profile Navigation Tabs -->
+            <div class="profile-nav-tabs">
+                <a href="#posts" class="tab-link active">Posts</a>
+                <a href="#about" class="tab-link">About</a>
+                <a href="#friends" class="tab-link">Friends</a>
+                <a href="#photos" class="tab-link">Photos</a>
+                <a href="#videos" class="tab-link">Videos</a>
+                <a href="#more" class="tab-link">More ▾</a>
+            </div>
+        </section>
+
+        <!-- Two Column Dashboard Layout -->
+        <div class="profile-body-grid">
+            <!-- Left Column: Intro & Info -->
+            <aside class="left-col">
+                <!-- Intro Card -->
+                <div class="fb-card">
+                    <h2 class="card-title">Intro</h2>
+                    <p class="bio-text">DevOps &amp; Cloud Engineer 🚀 Automating AWS infrastructure with Terraform and Ansible.</p>
+                    <button class="btn btn-full-secondary">Edit bio</button>
+
+                    <ul class="intro-list">
+                        <li>💼 Works at <strong>Cloud Infrastructure</strong></li>
+                        <li>🎓 Studied <strong>Computer Science &amp; Engineering</strong></li>
+                        <li>🏠 Lives in <strong>Colombo, Sri Lanka</strong></li>
+                        <li>📍 From <strong>Galle, Sri Lanka</strong></li>
+                        <li>🕒 Joined <strong>October 2026</strong></li>
+                    </ul>
+
+                    <button class="btn btn-full-secondary">Edit details</button>
+                </div>
+
+                <!-- Photos Preview Card -->
+                <div class="fb-card">
+                    <div class="card-header-row">
+                        <h2 class="card-title">Photos</h2>
+                        <a href="#" class="see-all-link">See all photos</a>
+                    </div>
+                    <div class="media-grid">
+                        <div class="media-box photo-1">☁️ AWS</div>
+                        <div class="media-box photo-2">⚙️ Terraform</div>
+                        <div class="media-box photo-3">📜 Ansible</div>
+                        <div class="media-box photo-4">🐧 Ubuntu</div>
+                        <div class="media-box photo-5">🌐 Nginx</div>
+                        <div class="media-box photo-6">💻 Git</div>
+                    </div>
+                </div>
+
+                <!-- Friends Preview Card -->
+                <div class="fb-card">
+                    <div class="card-header-row">
+                        <div>
+                            <h2 class="card-title">Friends</h2>
+                            <span class="sub-text">1,420 friends</span>
+                        </div>
+                        <a href="#" class="see-all-link">See all friends</a>
+                    </div>
+                    <div class="friends-grid">
+                        <div class="friend-item">
+                            <div class="friend-avatar fa-1">A</div>
+                            <span class="friend-name">Alex M.</span>
+                        </div>
+                        <div class="friend-item">
+                            <div class="friend-avatar fa-2">E</div>
+                            <span class="friend-name">Emma W.</span>
+                        </div>
+                        <div class="friend-item">
+                            <div class="friend-avatar fa-3">D</div>
+                            <span class="friend-name">David K.</span>
+                        </div>
+                        <div class="friend-item">
+                            <div class="friend-avatar fa-4">S</div>
+                            <span class="friend-name">Sarah P.</span>
+                        </div>
+                        <div class="friend-item">
+                            <div class="friend-avatar fa-5">M</div>
+                            <span class="friend-name">Michael L.</span>
+                        </div>
+                        <div class="friend-item">
+                            <div class="friend-avatar fa-6">N</div>
+                            <span class="friend-name">Nuwan R.</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right Column: Posts Feed -->
+            <section class="right-col">
+                <!-- Create Post Card -->
+                <div class="fb-card create-post-card">
+                    <div class="create-post-top">
+                        <img src="assets/profile.jpg" alt="Your Profile" class="user-avatar-small">
+                        <input type="text" class="create-post-input" placeholder="What's on your mind, Sachintha?">
+                    </div>
+                    <hr class="card-divider">
+                    <div class="create-post-actions">
+                        <button class="post-action-btn"><span class="icon-red">📹</span> Live video</button>
+                        <button class="post-action-btn"><span class="icon-green">🖼️</span> Photo/video</button>
+                        <button class="post-action-btn"><span class="icon-yellow">😊</span> Feeling/activity</button>
+                    </div>
+                </div>
+
+                <!-- Feed Post 1 -->
+                <article class="fb-card post-card">
+                    <div class="post-header">
+                        <img src="assets/profile.jpg" alt="Sachintha Dilshan" class="user-avatar-small">
+                        <div class="post-author-meta">
+                            <h3 class="post-author-name">Sachintha Dilshan</h3>
+                            <span class="post-time">2 hours ago • 🌍 Public</span>
+                        </div>
+                        <button class="post-menu-btn">•••</button>
+                    </div>
+
+                    <p class="post-content">
+                        Excited to announce my new DevOps project: <strong>AWS Infrastructure Provisioning &amp; Deployment Automation</strong>! 🚀
+                        <br><br>
+                        Provisioned cloud resources with <strong>Terraform</strong>, configured Ubuntu servers via <strong>Ansible</strong>, and serving this static website through <strong>Nginx</strong>. Everything is version controlled on GitHub. ☁️💻
+                    </p>
+
+                    <div class="post-stats-row">
+                        <span class="reactions-count">👍❤️ 142</span>
+                        <span class="comments-count">18 comments • 4 shares</span>
+                    </div>
+
+                    <hr class="card-divider">
+
+                    <div class="post-action-bar">
+                        <button class="feed-btn">👍 Like</button>
+                        <button class="feed-btn">💬 Comment</button>
+                        <button class="feed-btn">↗️ Share</button>
+                    </div>
+                </article>
+
+                <!-- Feed Post 2 -->
+                <article class="fb-card post-card">
+                    <div class="post-header">
+                        <img src="assets/profile.jpg" alt="Sachintha Dilshan" class="user-avatar-small">
+                        <div class="post-author-meta">
+                            <h3 class="post-author-name">Sachintha Dilshan</h3>
+                            <span class="post-time">Yesterday at 18:30 • 🌍 Public</span>
+                        </div>
+                        <button class="post-menu-btn">•••</button>
+                    </div>
+
+                    <p class="post-content">
+                        Repository architecture initialized and clean! Zero sensitive credentials in Git, clean .gitignore, and modular playbooks ready for deployment.
+                    </p>
+
+                    <div class="post-stats-row">
+                        <span class="reactions-count">👍 89</span>
+                        <span class="comments-count">6 comments</span>
+                    </div>
+
+                    <hr class="card-divider">
+
+                    <div class="post-action-bar">
+                        <button class="feed-btn">👍 Like</button>
+                        <button class="feed-btn">💬 Comment</button>
+                        <button class="feed-btn">↗️ Share</button>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
