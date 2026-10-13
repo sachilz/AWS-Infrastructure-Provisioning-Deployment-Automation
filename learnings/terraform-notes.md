@@ -31,3 +31,11 @@
 - `terraform.tfvars`: Local values for variables (ignored in Git).
 - `main.tf`: Core cloud resources.
 - `outputs.tf`: Outputs exposed for humans and downstream automation (e.g., Ansible).
+
+## 5. HCL Expressions: String Interpolation vs. Direct References
+- **String Interpolation (`"${var.example}-suffix"`)**:
+  - Used when combining variable values with static text or other expressions.
+  - Example: `Name = "${var.project_name}-vpc"` evaluates to `"aws-devops-automation-vpc"`.
+- **Direct Variable Reference (`var.example`)**:
+  - Used when assigning a variable's value as-is without any extra characters.
+  - Example: `Project = var.project_name` (no `${...}` needed).

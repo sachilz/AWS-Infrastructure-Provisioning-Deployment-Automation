@@ -26,6 +26,26 @@ In AWS VPCs, DNS resolution is controlled by two distinct boolean flags:
 
 > **Dependency Rule**: In AWS, `enable_dns_hostnames = true` requires `enable_dns_support = true` to function. Setting both to `true` is industry best practice for standard VPCs.
 
+### AWS Resource Tags & String Interpolation
+Tags are key-value metadata labels (`Key = Value`) attached to AWS cloud resources.
+
+```hcl
+tags = {
+  Name    = "${var.project_name}-vpc"
+  Project = var.project_name
+}
+```
+
+1. **The Special `Name` Tag**:
+   - The AWS Management Console specifically searches for the capital **`Name`** tag to display as the title/label of the resource in dashboard tables. Without it, you only see a random alphanumeric ID (`vpc-09b3e18a2d1f`).
+2. **String Interpolation (`"${var.project_name}-vpc"`)**:
+   - In HCL, `"${...}"` allows embedding a variable inside a string.
+   - If `var.project_name` is `"aws-devops-automation"`, the expression evaluates to `"aws-devops-automation-vpc"`.
+3. **The `Project` Tag (`Project = var.project_name`)**:
+   - Used for **Cost Allocation & Billing**: In the AWS Billing Console, you can filter monthly expenditure by the `Project` tag to track the exact cost of this environment.
+   - Used for **Resource Tracking & Cleanup**: Enables filtering and grouping all resources belonging to this project across different AWS regions and services.
+   - When no extra text is added, the variable can be referenced directly without `${...}`.
+
 ## 2. Subnets (Public vs. Private)
 - **Subnet (`10.0.1.0/24`)**: A partition of the VPC IP range in a specific Availability Zone (e.g., `us-east-1a`).
 - **What makes a subnet "Public"?**:
