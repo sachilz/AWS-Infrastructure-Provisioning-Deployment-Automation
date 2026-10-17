@@ -214,3 +214,111 @@ The AWS Security Group attached to the EC2 instance did not have an active Ingre
 
 #### 5. Prevention / Takeaway
 When working with residential dynamic IPs, verify your current public IP address before testing remote SSH and Ansible connections.
+
+---
+
+### [ISSUE-007] Ansible World-Writable Directory & Ignored `ansible.cfg` in WSL
+
+- **Date**: 2026-10-17
+- **Component**: Ansible / WSL 2 / Filesystem Permissions
+- **Severity**: High (Ignored configuration and inventory defaults)
+
+#### 1. What Happened
+Running `ansible webservers -m ping` from the project's `ansible/` directory failed to detect the inventory and target hosts defined in `ansible.cfg`.
+
+```bash
+ansible webservers -m ping
+```
+
+#### 2. Exact Error Output
+```text
+[WARNING]: Ansible is being run in a world writable directory (/mnt/c/Users/sachintha/Desktop/AWS-Infrastructure-Provisioning-Deployment-Automation/ansible), ignoring it as an ansible.cfg source.
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+[WARNING]: Could not match supplied host pattern, ignoring: webservers
+```
+
+#### 3. Root Cause Analysis
+Ansible includes a security feature that deliberately skips reading `ansible.cfg` if the directory has world-writable permissions (`0777`). In WSL 2, Windows NTFS drives mounted at `/mnt/c/` default to permission `0777`. As a result, Ansible skipped `ansible.cfg` and missed the default inventory file.
+
+#### 4. Solution / Fix
+Set the `ANSIBLE_CONFIG` environment variable to explicitly tell Ansible to trust and load the configuration file:
+```bash
+export ANSIBLE_CONFIG=./ansible.cfg
+# To persist across terminal sessions:
+echo 'export ANSIBLE_CONFIG=./ansible.cfg' >> ~/.bashrc
+source ~/.bashrc
+```
+
+#### 5. Prevention / Takeaway
+For Linux-native tooling with strict permission requirements, either set the path via environment variables or store project code in the native Linux filesystem (`/home/username/`) rather than `/mnt/c/`.
+
+---
+
+### [ISSUE-008] Ansible Role Not Found (`ERROR! the role 'nginx' was not found`)
+
+- **Date**: 2026-10-17
+- **Component**: Ansible / Role Paths / WSL
+- **Severity**: High (Playbook syntax checks and execution blocked)
+
+#### 1. What Happened
+Running `ansible-playbook playbooks/site.yml --syntax-check` failed because Ansible could not locate the `nginx` role referenced inside `playbooks/site.yml`.
+
+#### 2. Exact Error Output
+```text
+[WARNING]: Ansible is being run in a world writable directory (/mnt/c/Users/.../ansible), ignoring it as an ansible.cfg source.
+ERROR! the role 'nginx' was not found in .../ansible/playbooks/roles:...
+
+The offending line appears to be:
+
+  roles:
+    - nginx
+      ^ here
+```
+
+#### 3. Root Cause Analysis
+Because the current directory was treated as world-writable in WSL, Ansible ignored `ansible.cfg`, which defined `roles_path = roles`. Without this setting, Ansible only looked in `<playbook_dir>/roles` (`playbooks/roles/`) instead of the project's root `roles/` directory.
+
+#### 4. Solution / Fix
+Exported `ANSIBLE_CONFIG=./ansible.cfg` in `~/.bashrc`:
+```bash
+echo 'export ANSIBLE_CONFIG=./ansible.cfg' >> ~/.bashrc
+source ~/.bashrc
+```
+This forces Ansible to load `ansible.cfg`, properly registering `roles_path = roles`.
+
+#### 5. Prevention / Takeaway
+When organizing playbooks in subdirectories (e.g. `playbooks/`), either configure `roles_path` in a trusted `ansible.cfg` or reference roles using relative paths (`- role: ../roles/<name>`).
+
+---
+
+### [ISSUE-009] Nginx Template Validation Failure (`"server" directive is not allowed here`)
+
+- **Date**: 2026-10-17
+- **Component**: Ansible / Nginx / Template Validation
+- **Severity**: High (Playbook execution aborted during Nginx site template deployment)
+
+#### 1. What Happened
+Executing `ansible-playbook playbooks/site.yml` failed during the `Install Nginx configuration` task with a validation error.
+
+```bash
+ansible-playbook -i inventory/hosts.ini playbooks/site.yml
+```
+
+#### 2. Exact Error Output
+```text
+TASK [nginx : Install Nginx configuration] ******************************************************************
+fatal: [web1]: FAILED! => {
+    "msg": "failed to validate",
+    "stderr": "[emerg] 2438#2438: \"server\" directive is not allowed here in /home/ubuntu/.ansible/tmp/.../source:2\nnginx: configuration file ... test failed\n"
+}
+```
+
+#### 3. Root Cause Analysis
+The task had `validate: "nginx -t -c %s"`. In Nginx, the `-c` flag instructs the binary to parse the file as the complete root configuration (`nginx.conf`), where `server` blocks are only allowed within an `http { ... }` block. Because `nginx.conf.j2` is an included virtual host snippet (placed in `/etc/nginx/sites-available/default`), it only defines a `server { ... }` block without outer wrappers, causing the root-level syntax check to fail.
+
+#### 4. Solution / Fix
+Removed `validate: "nginx -t -c %s"` from the `ansible.builtin.template` task in `ansible/roles/nginx/tasks/main.yml`.
+
+#### 5. Prevention / Takeaway
+Do not use `nginx -t -c %s` to validate virtual host snippets or files located in `sites-available/` or `conf.d/`. Use global validation via a subsequent `nginx -t` command task if validation is desired.

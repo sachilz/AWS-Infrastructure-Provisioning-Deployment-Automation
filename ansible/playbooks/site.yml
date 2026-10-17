@@ -1,6 +1,8 @@
+
 ---
 # Master Orchestration Playbook
-# Provisions and configures web servers and deploys static site
+# Configures the web server and deploys the static website.
+
 - name: Configure Web Server and Deploy Application
   hosts: webservers
   become: true

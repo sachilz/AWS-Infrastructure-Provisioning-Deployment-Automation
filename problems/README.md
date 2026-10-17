@@ -12,6 +12,9 @@ Documenting problems and solutions is one of the strongest indicators of practic
 ## 📁 Folder Contents
 
 - [`aws-cli-wsl-troubleshooting.md`](aws-cli-wsl-troubleshooting.md): In-depth WSL Ubuntu setup guide covering APT package issues, missing dependencies, root installation fixes, and STS authentication.
+- [`ansible-world-writable-directory.md`](ansible-world-writable-directory.md): Guide for resolving Ansible's world-writable directory security check and ignored `ansible.cfg` in WSL 2.
+- [`ansible-role-not-found.md`](ansible-role-not-found.md): Guide for resolving missing role lookups caused by custom directory layouts and skipped `roles_path`.
+- [`nginx-template-validation-failure.md`](nginx-template-validation-failure.md): Guide on Nginx configuration context hierarchy and why `validate: "nginx -t -c %s"` fails for virtual host snippets.
 - [`resolved-issues.md`](resolved-issues.md): Running catalog of all resolved problems encountered across Terraform, Ansible, AWS, and Linux.
 - [`issue-template.md`](issue-template.md): Standardized template to copy and fill out whenever you hit a new error.
 
