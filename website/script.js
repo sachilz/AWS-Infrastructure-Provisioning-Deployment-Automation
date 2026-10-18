@@ -1,5 +1,5 @@
 /**
- * Sachintha Dilshan - Modern Profile Interactivity
+ * Sachintha Dissanayaka - Modern Profile Interactivity
  * Handles Theme Toggling, Dynamic Host/IP Detection, Likes, Post Creation, and Tab Navigation.
  */
 
@@ -78,12 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
             newPostArticle.innerHTML = `
                 <div class="post-header">
                     <div class="post-author-avatar-wrap">
-                        <img src="assets/profile.jpg" alt="Sachintha Dilshan" class="user-avatar-small">
+                        <img src="assets/profile.jpg" alt="Sachintha Dissanayaka" class="user-avatar-small">
                         <span class="post-online-dot"></span>
                     </div>
                     <div class="post-author-meta">
                         <div class="author-title-row">
-                            <h3 class="post-author-name">Sachintha Dilshan</h3>
+                            <h3 class="post-author-name">Sachintha Dissanayaka</h3>
                             <span class="verified-badge-mini" title="Verified">✓</span>
                         </div>
                         <span class="post-time">
