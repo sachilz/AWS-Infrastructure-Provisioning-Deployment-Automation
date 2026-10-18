@@ -14,6 +14,7 @@ Documenting what you learn turns a standard tutorial project into a high-value e
 | **Module 2** | Infrastructure as Code (Terraform) | In Progress | [`terraform-notes.md`](terraform-notes.md), [`terraform-aws-authentication.md`](terraform-aws-authentication.md), [`infrastructure-verification-commands.md`](infrastructure-verification-commands.md) |
 | **Module 3** | Configuration Management (Ansible) | Upcoming | [`ansible-notes.md`](ansible-notes.md) |
 | **Module 4** | Linux Administration & Nginx Web Server | In Progress | [`linux-nginx-notes.md`](linux-nginx-notes.md) |
+| **Module 5** | Containerization & Compose (Docker) | In Progress | [`docker-containerization-notes.md`](docker-containerization-notes.md) |
 
 ---
 

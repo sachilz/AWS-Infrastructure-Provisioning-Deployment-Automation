@@ -1,0 +1,11 @@
+services:
+  website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: devops-profile-website:1.0
+    container_name: devops-profile-web
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+

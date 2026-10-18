@@ -7,4 +7,4 @@
   hosts: webservers
   become: true
   roles:
-    - nginx
+    - role: ../roles/nginx
