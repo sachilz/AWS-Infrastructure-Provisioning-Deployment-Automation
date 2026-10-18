@@ -100,14 +100,15 @@ pipeline {
             }
         }
 
+       
         stage('8. Ansible Syntax Check') {
             steps {
                 bat '''
                     docker run --rm ^
-                      -v "%WORKSPACE%/ansible:/ansible" ^
-                      -w /ansible ^
-                      cytopia/ansible:latest ^
-                      ansible-playbook -i inventory/hosts.ini playbooks/site.yml --syntax-check
+                    -v "%WORKSPACE%/ansible:/ansible" ^
+                    -w /ansible ^
+                    cytopia/ansible:latest ^
+                    ansible-playbook -i inventory/hosts.ini playbooks/site.yml --syntax-check
                 '''
             }
         }
