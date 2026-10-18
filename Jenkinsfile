@@ -174,6 +174,9 @@ pipeline {
                     string(credentialsId: 'AWS_SECRET_ACCESS_KEY',  variable: 'AWS_SECRET_ACCESS_KEY')
                 ]) {
                     bat '''
+                        set AWS_PROFILE=
+                        set AWS_DEFAULT_PROFILE=
+
                         terraform -chdir=terraform init
                         if errorlevel 1 exit /b 1
 
