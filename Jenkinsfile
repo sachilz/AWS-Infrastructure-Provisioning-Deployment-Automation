@@ -181,7 +181,8 @@ pipeline {
                         if errorlevel 1 exit /b 1
 
                         terraform -chdir=terraform plan -input=false ^
-                          -var="ssh_allowed_cidr=127.0.0.1/32"
+                          -var="ssh_allowed_cidr=127.0.0.1/32" ^
+                          -var="public_key_path=C:/Windows/System32/drivers/etc/hosts"
                     '''
                 }
             }
