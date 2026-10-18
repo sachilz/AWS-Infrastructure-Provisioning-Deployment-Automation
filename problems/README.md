@@ -21,6 +21,7 @@ Documenting problems and solutions is one of the strongest indicators of practic
   - [`ansible-role-lookup-workspace-mismatch.md`](jenkins-pipeline/ansible-role-lookup-workspace-mismatch.md): Ansible role lookup failure and dynamic `%WORKSPACE%` path resolution.
   - [`wsl-local-system-not-supported.md`](jenkins-pipeline/wsl-local-system-not-supported.md): WSL execution blocked under Windows Service `Local System` account.
   - [`port-already-allocated-test-container.md`](jenkins-pipeline/port-already-allocated-test-container.md): Test container port collision (`8081`) and health check mismatch.
+  - [`test-container-healthcheck-powershell.md`](jenkins-pipeline/test-container-healthcheck-powershell.md): PowerShell `Invoke-WebRequest` IE engine requirement and `timeout` input redirection error.
 - [`resolved-issues.md`](resolved-issues.md): Running catalog of all resolved problems encountered across Terraform, Ansible, AWS, and Linux.
 - [`issue-template.md`](issue-template.md): Standardized template to copy and fill out whenever you hit a new error.
 

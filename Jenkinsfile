@@ -173,7 +173,8 @@ pipeline {
                     terraform -chdir=terraform init
                     if errorlevel 1 exit /b 1
 
-                    terraform -chdir=terraform plan -input=false
+                    terraform -chdir=terraform plan -input=false ^
+                      -var="ssh_allowed_cidr=127.0.0.1/32"
                 '''
             }
         }
