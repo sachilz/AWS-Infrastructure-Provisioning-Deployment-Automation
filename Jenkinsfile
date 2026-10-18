@@ -169,11 +169,22 @@ pipeline {
 
         stage('13. Terraform Plan') {
             steps {
-                bat '''
-                    echo === Stage 13 started ===
-                    echo AWS_ACCESS_KEY_ID is: %AWS_ACCESS_KEY_ID%
-                    echo Credential binding test complete
-                '''
+                withCredentials([
+                    string(credentialsId: 'AWS_ACCESS_KEY_ID',     variable: 'AWS_ACCESS_KEY_ID'),
+                    string(credentialsId: 'AWS_SECRET_ACCESS_KEY',  variable: 'AWS_SECRET_ACCESS_KEY')
+                ]) {
+                    bat '''
+                        set AWS_PROFILE=
+                        set AWS_DEFAULT_PROFILE=
+
+                        terraform -chdir=terraform init
+                        if errorlevel 1 exit /b 1
+
+                        terraform -chdir=terraform plan -input=false ^
+                          -var="ssh_allowed_cidr=127.0.0.1/32" ^
+                          -var="public_key_path=C:/Windows/System32/drivers/etc/hosts"
+                    '''
+                }
             }
         }
 
