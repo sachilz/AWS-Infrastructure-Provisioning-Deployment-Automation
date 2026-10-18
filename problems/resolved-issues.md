@@ -322,3 +322,35 @@ Removed `validate: "nginx -t -c %s"` from the `ansible.builtin.template` task in
 
 #### 5. Prevention / Takeaway
 Do not use `nginx -t -c %s` to validate virtual host snippets or files located in `sites-available/` or `conf.d/`. Use global validation via a subsequent `nginx -t` command task if validation is desired.
+
+---
+
+### [ISSUE-010] Public IP Showing Outdated Webpage After Code Changes (Unexecuted Deployment & Port 80 Service Transition)
+
+- **Date**: 2026-10-18
+- **Component**: Deployment Automation / Ansible / Docker / EC2 / Web Service
+- **Severity**: Medium (Developer confusion / Outdated production artifacts served)
+
+#### 1. What Happened
+After updating website files (`index.html`, `style.css`, `script.js`) and adding an Ansible Docker deployment role, accessing the public IP (`http://35.173.190.241/`) continued to display the previous, unmodernized webpage.
+
+#### 2. Exact Symptoms
+- The browser rendered the legacy static profile instead of the new modernized Facebook UI.
+- Browser hard-refresh (`Ctrl + F5`) did not display the changes.
+
+#### 3. Root Cause Analysis
+1. **Unexecuted Delivery Lifecycle**: Local changes made on the Windows development workstation do not sync automatically to the AWS EC2 instance. Because Stage 14 (`Deploy to EC2`) in `Jenkinsfile` was stubbed out (`Deployment is not enabled yet`), no automated CI/CD pipeline transferred the new assets.
+2. **Daemon vs. Container Transition**: The EC2 instance was previously running a standalone `nginx` systemd service bound to port 80. Migrating to Docker required stopping and disabling host `nginx` so the Docker container could bind to port `80:80` without a port collision.
+
+#### 4. Solution / Fix
+1. Created `ansible/roles/docker/tasks/main.yml` to stop host Nginx, install Docker, copy application files, build the Docker image, and run the container on port `80:80`.
+2. Executed the playbook from WSL:
+```bash
+cd /mnt/c/Users/sachintha/Desktop/AWS-Infrastructure-Provisioning-Deployment-Automation/ansible
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory/hosts.ini playbooks/site.yml
+```
+3. Verified the active container using `docker ps` on EC2, confirming `devops-profile-web` is listening on `0.0.0.0:80->80/tcp`.
+
+#### 5. Prevention / Takeaway
+Always distinguish between local workspace modifications and deployed infrastructure state. When transitioning a service from a host-level systemd service to a Docker container, always ensure legacy services bound to the same port are stopped or decommissioned.
+

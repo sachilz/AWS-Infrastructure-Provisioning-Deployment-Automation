@@ -15,6 +15,7 @@ Documenting problems and solutions is one of the strongest indicators of practic
 - [`ansible-world-writable-directory.md`](ansible-world-writable-directory.md): Guide for resolving Ansible's world-writable directory security check and ignored `ansible.cfg` in WSL 2.
 - [`ansible-role-not-found.md`](ansible-role-not-found.md): Guide for resolving missing role lookups caused by custom directory layouts and skipped `roles_path`.
 - [`nginx-template-validation-failure.md`](nginx-template-validation-failure.md): Guide on Nginx configuration context hierarchy and why `validate: "nginx -t -c %s"` fails for virtual host snippets.
+- [`outdated-webpage-unexecuted-deployment.md`](outdated-webpage-unexecuted-deployment.md): Troubleshooting outdated webpage display after local code edits, explaining deployment execution gaps and Nginx-to-Docker port 80 migration.
 - [**`jenkins-pipeline/`**](jenkins-pipeline/README.md): **Dedicated folder for Jenkins CI/CD pipeline issues and fixes:**
   - [`sonar-credentials-not-found.md`](jenkins-pipeline/sonar-credentials-not-found.md): Missing SonarQube credentials in Jenkins store.
   - [`docker-command-not-found-windows-service.md`](jenkins-pipeline/docker-command-not-found-windows-service.md): Docker binary missing from Windows Service system PATH.
