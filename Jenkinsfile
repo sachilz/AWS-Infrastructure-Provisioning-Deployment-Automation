@@ -147,14 +147,18 @@ pipeline {
 
                     docker run -d ^
                     --name %TEST_CONTAINER% ^
-                    -p 127.0.0.1:18081:80 ^
+                    -p 18081:80 ^
                     %IMAGE_NAME%:%IMAGE_TAG%
 
                     if errorlevel 1 exit /b 1
 
-                    powershell -NoProfile -Command "$ok=$false; for($i=0;$i -lt 20;$i++){try{$r=Invoke-WebRequest 'http://127.0.0.1:18081/' -TimeoutSec 2; if($r.StatusCode -eq 200){$ok=$true;break}}catch{}; Start-Sleep -Seconds 2}; if(-not $ok){exit 1}"
+                    timeout /t 3 /nobreak >nul
+
+                    powershell -NoProfile -Command "$ok=$false; for($i=0;$i -lt 20;$i++){try{$r=Invoke-WebRequest 'http://localhost:18081/' -TimeoutSec 2; if($r.StatusCode -eq 200){$ok=$true;break}}catch{}; Start-Sleep -Seconds 2}; if(-not $ok){exit 1}"
 
                     if errorlevel 1 (
+                        echo === Container logs for debugging ===
+                        docker logs %TEST_CONTAINER%
                         docker rm -f %TEST_CONTAINER% 2>nul
                         exit /b 1
                     )
