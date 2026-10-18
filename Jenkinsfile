@@ -147,7 +147,7 @@ pipeline {
 
                     docker run -d ^
                     --name %TEST_CONTAINER% ^
-                    -p 127.0.0.1:8081:80 ^
+                    -p 127.0.0.1:18081:80 ^
                     %IMAGE_NAME%:%IMAGE_TAG%
 
                     if errorlevel 1 exit /b 1
