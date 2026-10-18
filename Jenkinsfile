@@ -53,7 +53,7 @@ pipeline {
                 withSonarQubeEnv('sonarqube') {
                     withCredentials([
                         string(
-                            credentialsId: 'sonar-token',
+                            credentialsId: 'jenkins-devops-token',
                             variable: 'SONAR_TOKEN'
                         )
                     ]) {
