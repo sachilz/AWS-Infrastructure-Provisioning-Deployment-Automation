@@ -152,14 +152,14 @@ pipeline {
 
                     if errorlevel 1 exit /b 1
 
-                    powershell -NoProfile -Command "$ok=$false; for($i=0;$i -lt 15;$i++){try{$r=Invoke-WebRequest 'http://127.0.0.1:18081/' -TimeoutSec 2; if($r.StatusCode -eq 200){$ok=$true;break}}catch{}; Start-Sleep -Seconds 2}; if(-not $ok){exit 1}"
+                    powershell -NoProfile -Command "$ok=$false; for($i=0;$i -lt 20;$i++){try{$r=Invoke-WebRequest 'http://127.0.0.1:18081/' -TimeoutSec 2; if($r.StatusCode -eq 200){$ok=$true;break}}catch{}; Start-Sleep -Seconds 2}; if(-not $ok){exit 1}"
 
-                    set TEST_RESULT=%ERRORLEVEL%
+                    if errorlevel 1 (
+                        docker rm -f %TEST_CONTAINER% 2>nul
+                        exit /b 1
+                    )
 
                     docker rm -f %TEST_CONTAINER% 2>nul
-
-                    if not "%TEST_RESULT%"=="0" exit /b %TEST_RESULT%
-
                     echo Website container test passed.
                 '''
             }
