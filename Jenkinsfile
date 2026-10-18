@@ -103,7 +103,11 @@ pipeline {
         stage('8. Ansible Syntax Check') {
             steps {
                 bat '''
-                    wsl bash -lc "cd /mnt/c/Users/sachintha/Desktop/AWS-Infrastructure-Provisioning-Deployment-Automation && ansible-playbook -i ansible/inventory/hosts.ini ansible/playbooks/site.yml --syntax-check"
+                    docker run --rm ^
+                      -v "%WORKSPACE%/ansible:/ansible" ^
+                      -w /ansible ^
+                      cytopia/ansible:latest ^
+                      ansible-playbook -i inventory/hosts.ini playbooks/site.yml --syntax-check
                 '''
             }
         }
