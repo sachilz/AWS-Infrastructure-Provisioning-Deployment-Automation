@@ -1,0 +1,88 @@
+---
+# ==============================================================================
+# Ansible Role: Docker Setup & Containerized Website Deployment on EC2
+# ==============================================================================
+
+- name: Ensure standalone nginx service is stopped and disabled (prevent port 80 conflict)
+  ansible.builtin.service:
+    name: nginx
+    state: stopped
+    enabled: false
+  failed_when: false
+
+- name: Install Docker prerequisites
+  ansible.builtin.apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
+    update_cache: true
+
+- name: Install Docker
+  ansible.builtin.apt:
+    pkg:
+      - docker.io
+    state: present
+
+- name: Ensure Docker service is running and enabled
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: true
+
+- name: Add ubuntu user to docker group
+  ansible.builtin.user:
+    name: ubuntu
+    groups: docker
+    append: true
+
+- name: Create application directory on EC2
+  ansible.builtin.file:
+    path: /opt/devops-website
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Copy Dockerfile to EC2
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../../Dockerfile"
+    dest: /opt/devops-website/Dockerfile
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Copy website files to EC2
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../../website/"
+    dest: /opt/devops-website/website/
+    owner: root
+    group: root
+    mode: preserve
+
+- name: Build Docker image inside EC2
+  ansible.builtin.command:
+    cmd: docker build -t devops-profile-website:latest .
+    chdir: /opt/devops-website
+  register: docker_build_output
+  changed_when: true
+
+- name: Remove existing website container if present
+  ansible.builtin.command:
+    cmd: docker rm -f devops-profile-web
+  failed_when: false
+  changed_when: false
+
+- name: Run website container on EC2
+  ansible.builtin.command:
+    cmd: >
+      docker run -d
+      --name devops-profile-web
+      --restart unless-stopped
+      -p 80:80
+      devops-profile-website:latest
+  register: docker_run_output
+  changed_when: true

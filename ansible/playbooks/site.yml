@@ -3,8 +3,8 @@
 # Master Orchestration Playbook
 # Configures the web server and deploys the static website.
 
-- name: Configure Web Server and Deploy Application
+- name: Configure Web Server and Deploy Containerized Application
   hosts: webservers
   become: true
   roles:
-    - role: ../roles/nginx
+    - role: ../roles/docker
